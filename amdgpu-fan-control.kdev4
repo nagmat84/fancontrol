@@ -1,0 +1,3 @@
+[Project]
+Name=amdgpu-fan-control
+Manager=KDevCMakeManager
