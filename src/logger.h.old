@@ -1,0 +1,44 @@
+#ifndef _LOGGER_H_
+#define _LOGGER_H_
+
+#include <string>
+#include <syslog.h>
+
+namespace AmdGpuFanControl {
+
+class Logger {
+	public:
+		enum Severity {
+			EMERGENCY = LOG_EMERG,
+			ALERT = LOG_ALERT,
+			CRITICAL = LOG_CRIT,
+			ERROR = LOG_ERR,
+			WARNING = LOG_WARNING,
+			NOTICE = LOG_NOTICE,
+			INFO = LOG_INFO,
+			DEBUG = LOG_DEBUG
+		};
+
+	public:
+		static Severity const DEFAULT_LOG_LEVEL;
+
+	private:
+		Logger();
+		Logger( Logger const& ) = delete;
+		Logger( Logger&& ) = delete;
+		Logger& operator=( Logger const& ) = delete;
+
+	public:
+		static Logger& get();
+		inline void setLogLevel(Severity const level) { logLevel = level; };
+		void enableConsoleOutput();
+		void log(Severity const severity, char const* const msg) const;
+		void log(Severity const severity, std::string const& msg) const;
+
+	private:
+		Severity logLevel;
+};
+}
+
+#endif
+

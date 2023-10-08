@@ -1,0 +1,41 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00$\x00a\x00m\x00d\x00g\x00p\x00u\x00-\x00f\x00a\x00n\x00-\x00c\x00o\x00n\x00t\x00r\x00o\x00l)
+
+[CMake]
+Build Directory Count=1
+Current Build Directory Index-Host-System=0
+
+[CMake][CMake Build Directory 0]
+Build Directory Path=/home/matthias/Entwicklung/amdgpu-fan-control/build
+Build Type=Debug
+CMake Binary=/usr/bin/cmake
+CMake Executable=/usr/bin/cmake
+Environment Profile=
+Extra Arguments=
+Install Directory=/usr/local
+Runtime=Host-System
+
+[CustomDefinesAndIncludes][ProjectPath0]
+Path=.
+parseAmbiguousAsCPP=true
+parserArguments=-ferror-limit=100 -fspell-checking -Wdocumentation -Wunused-parameter -Wunreachable-code -Wall -std=c++17
+parserArgumentsC=-ferror-limit=100 -fspell-checking -Wdocumentation -Wunused-parameter -Wunreachable-code -Wall -std=gnu11
+parserArgumentsCuda=-ferror-limit=100 -fspell-checking -Wdocumentation -Wunused-parameter -Wunreachable-code -Wall -std=c++14
+parserArgumentsOpenCL=-ferror-limit=100 -fspell-checking -Wdocumentation -Wunused-parameter -Wunreachable-code -Wall -cl-std=CL1.1
+
+[CustomDefinesAndIncludes][ProjectPath0][Compiler]
+Name=Clang
+
+[Project]
+VersionControlSupport=kdevgit
+
+[SourceFormatter]
+UseDefault=false
+text/x-c++hdr=kdevastyle||User1
+text/x-c++src=kdevastyle||User1
+text/x-chdr=kdevcustomscript||GNU_indent_GNU
+text/x-csharp=kdevcustomscript||GNU_indent_GNU
+text/x-csrc=kdevcustomscript||GNU_indent_GNU
+text/x-java=kdevcustomscript||GNU_indent_GNU
+text/x-objc++src=kdevcustomscript||GNU_indent_GNU
+text/x-objcsrc=kdevcustomscript||GNU_indent_GNU

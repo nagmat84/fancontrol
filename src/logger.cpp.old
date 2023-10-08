@@ -1,0 +1,30 @@
+#include "logger.h"
+
+namespace AmdGpuFanControl {
+
+Logger::Severity const Logger::DEFAULT_LOG_LEVEL( Severity::WARNING );
+
+Logger::Logger() : logLevel( DEFAULT_LOG_LEVEL ) {
+	openlog( NULL, LOG_ODELAY, LOG_DAEMON );
+}
+
+void Logger::enableConsoleOutput() {
+	closelog();
+	openlog( NULL, LOG_ODELAY|LOG_PERROR, LOG_DAEMON );
+}
+
+Logger& Logger::get() {
+	static Logger singleton;
+	return singleton;
+}
+
+void Logger::log(Severity const severity, char const* const msg) const {
+	if( severity > logLevel ) return;
+	syslog( severity, "%s", msg );
+}
+
+void Logger::log(Severity const severity, std::string const& msg) const {
+	log( severity, msg.c_str() );
+}
+
+}
