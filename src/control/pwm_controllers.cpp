@@ -14,21 +14,32 @@ namespace FanControl {
 PWMControllers::PWMControllers() :
 	config( Config::get() ),
 	runState( RunState::STOPPED ),
-	temperatureSensors(),
-	pwmActuators(),
+	temperatureSensors( config.getTemperatureSensorPathSeq().size() ),
+	pwmActuators( config.getPwmActuatorPathSeq().size() ),
 	pwmControllers() {
 	TemperatureSensorFactory& temperatureSensorFactory( TemperatureSensorFactory::get() );
-	PWMActuatorFactory& pwmActuatorFactory( PWMActuatorFactory::get() );
+	Config::StringSeq const& tempPaths(config.getTemperatureSensorPathSeq());
+	for( size_t i = 0; i != tempPaths.size(); i++ ) {
+		if( tempPaths[i].empty() ) continue;
+		temperatureSensors[i] = temperatureSensorFactory.getSensor(tempPaths[i]);
+	}
 
-	temperatureSensors.push_back( temperatureSensorFactory.getSensor(
-		 config.getTempSensorFilePath()
-	) );
-	pwmActuators.push_back( pwmActuatorFactory.getActuator(
-		config.getPwmActuatorFilePath()
-	) );
-	pwmControllers.push_back(
-		PWMController( temperatureSensors.back(), pwmActuators.back() )
-	);
+	PWMActuatorFactory& pwmActuatorFactory( PWMActuatorFactory::get() );
+	Config::StringSeq const& pwmPaths(config.getPwmActuatorPathSeq());
+	for( size_t i = 0; i != pwmPaths.size(); i++ ) {
+		if( pwmPaths[i].empty() ) continue;
+		pwmActuators[i] = pwmActuatorFactory.getActuator(pwmPaths[i]);
+	}
+
+	Config::ControllerConfigSeq ctrlConfs( config.getControllerConfigSeq() );
+	pwmControllers.reserve( ctrlConfs.size() );
+	for( auto const& conf : ctrlConfs ) {
+		pwmControllers.push_back( PWMController(
+			conf,
+			temperatureSensors[ conf.getTemperatureSensorIdx() ],
+			pwmActuators[ conf.getPwmActuatorIdx() ]
+		) );
+	}
 }
 
 PWMControllers& PWMControllers::get() {
