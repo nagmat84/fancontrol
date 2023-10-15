@@ -1,6 +1,6 @@
 #include "pwm_actuator_factory.h"
 
-namespace AmdGpuFanControl {
+namespace FanControl {
 
 PWMActuatorFactory& PWMActuatorFactory::get() {
 	static PWMActuatorFactory singleton;

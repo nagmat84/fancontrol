@@ -1,6 +1,6 @@
-#include "runtime_config.h"
-#include "pwm_controllers.h"
-#include "logger2.h"
+#include "config/config.h"
+#include "control/pwm_controllers.h"
+#include "logging/logger2.h"
 
 #include <iostream>
 #include <locale>
@@ -11,7 +11,7 @@ static sigset_t signalSet;
 static struct sigaction signalAction;
 
 static void terminate( int ) {
-	AmdGpuFanControl::PWMControllers& controllers( AmdGpuFanControl::PWMControllers::get() );
+	FanControl::PWMControllers& controllers( FanControl::PWMControllers::get() );
 	controllers.stop();
 }
 
@@ -35,7 +35,7 @@ static void configureLocale() {
  * The behaviour of `signal` is implementation-dependent, in particular with
  * respect to signal handling while a previous signal is still being handled.
  * We want to ensure that the program does not receive the same signal
- * a second time while the program still handles the first occurance.
+ * a second time while the program still handles the first occurance.AmdGpuFanControl
  * Only `sigaction` allows to ensurre that in a cross-platform compatible
  * manner.
  */
@@ -67,8 +67,8 @@ static void parseCmdLineArgs( int argc, char* argv[] ) {
 	for( int i = 1; i < argc; i++ ) {
 		std::string arg(argv[i]);
 		if ( arg.compare("-d") == 0 || arg.compare("--debug") == 0 ) {
-			AmdGpuFanControl::LogStream& log( AmdGpuFanControl::LogStream::get() );
-			log.setTreshold( AmdGpuFanControl::LogBuffer::Severity::DEBUG );
+			FanControl::LogStream& log( FanControl::LogStream::get() );
+			log.setTreshold( FanControl::LogBuffer::Severity::DEBUG );
 		}
 	}
 }
@@ -77,11 +77,11 @@ int main( int argc, char* argv[] ) {
 	configureLocale();
 	configureSignalHandling();
 
-	AmdGpuFanControl::RuntimeConfig& config( AmdGpuFanControl::RuntimeConfig::get() );
+	FanControl::Config& config( FanControl::Config::get() );
 	config.loadFromFile();
 
 	parseCmdLineArgs( argc, argv );
 
-	AmdGpuFanControl::PWMControllers& controllers( AmdGpuFanControl::PWMControllers::get() );
+	FanControl::PWMControllers& controllers( FanControl::PWMControllers::get() );
 	return controllers.run();
 }

@@ -1,6 +1,6 @@
 #include "logger2.h"
 
-namespace AmdGpuFanControl {
+namespace FanControl {
 
 LogBuffer::size_type const LogBuffer::LOG_BUFFER_SIZE = 1536;
 int const LogBuffer::SUCCESS = 0;

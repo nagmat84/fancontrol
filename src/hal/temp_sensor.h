@@ -1,11 +1,11 @@
 #ifndef _TEMP_SENSOR_H_
 #define _TEMP_SENSOR_H_
 
+#include "../types.h"
 #include <fstream>
 #include <memory>
-#include "types.h"
 
-namespace AmdGpuFanControl {
+namespace FanControl {
 
 class TemperatureSensorFactory;
 

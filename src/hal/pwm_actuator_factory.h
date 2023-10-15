@@ -1,12 +1,12 @@
 #ifndef _PWM_ACTUATOR_FACTORY_H_
 #define _PWM_ACTUATOR_FACTORY_H_
 
+#include "pwm_actuator.h"
 #include <unordered_map>
 #include <memory>
 #include <string>
-#include "pwm_actuator.h"
 
-namespace AmdGpuFanControl {
+namespace FanControl {
 
 class PWMActuatorFactory {
 	typedef std::weak_ptr<PWMActuator> WeakActuatorPtr;

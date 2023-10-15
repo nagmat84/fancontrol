@@ -1,6 +1,6 @@
 #include "pwm_actuator.h"
 
-namespace AmdGpuFanControl {
+namespace FanControl {
 
 char const* const PWMActuator::MODE_FILE_SUFFIX = "_enable";
 

@@ -5,7 +5,7 @@
 #include <streambuf>
 #include <syslog.h>
 
-namespace AmdGpuFanControl {
+namespace FanControl {
 
 class LogStream;
 

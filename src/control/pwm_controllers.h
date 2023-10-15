@@ -1,11 +1,11 @@
 #ifndef _PWM_CONTROLLERS_H_
 #define _PWM_CONTROLLERS_H_
 
-#include "runtime_config.h"
 #include "pwm_controller.h"
+#include "../config/config.h"
 #include <vector>
 
-namespace AmdGpuFanControl {
+namespace FanControl {
 class PWMControllers {
 	public:
 		enum RunState {
@@ -32,7 +32,7 @@ class PWMControllers {
 		int loop();
 
 	private:
-		RuntimeConfig const& config;
+		Config const& config;
 		RunState runState;
 		TemperatureSensorCollection temperatureSensors;
 		PWMActuatorCollection pwmActuators;

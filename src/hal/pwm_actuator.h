@@ -1,12 +1,12 @@
 #ifndef _PWM_ACTUATOR_H_
 #define _PWM_ACTUATOR_H_
 
-#include "types.h"
+#include "../types.h"
 #include <fstream>
 #include <string>
 #include <memory>
 
-namespace AmdGpuFanControl {
+namespace FanControl {
 
 class PWMActuatorFactory;
 

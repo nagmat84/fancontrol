@@ -1,12 +1,12 @@
 #ifndef _TEMP_SENSOR_FACTORY_H_
 #define _TEMP_SENSOR_FACTORY_H_
 
+#include "temp_sensor.h"
 #include <unordered_map>
 #include <memory>
 #include <string>
-#include "temp_sensor.h"
 
-namespace AmdGpuFanControl {
+namespace FanControl {
 
 class TemperatureSensorFactory {
 	typedef std::weak_ptr<TemperatureSensor> WeakSensorPtr;

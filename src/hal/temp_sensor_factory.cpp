@@ -1,6 +1,6 @@
 #include "temp_sensor_factory.h"
 
-namespace AmdGpuFanControl {
+namespace FanControl {
 
 TemperatureSensorFactory& TemperatureSensorFactory::get() {
 	static TemperatureSensorFactory singleton;

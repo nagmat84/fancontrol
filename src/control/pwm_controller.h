@@ -1,18 +1,28 @@
 #ifndef _PWM_CONTROLLER_H_
 #define _PWM_CONTROLLER_H_
 
-#include "runtime_config.h"
-#include "pwm_actuator.h"
-#include "temp_sensor.h"
+#include "../config/controller_config.h"
+#include "../hal/pwm_actuator.h"
+#include "../hal/temp_sensor.h"
 
-namespace AmdGpuFanControl {
+namespace FanControl {
 class PWMController {
 	private:
 		static Temperature const INITIAL_TEMPERATURE;
 		static PwmValue const INITIAL_PWM_VALUE;
 
 	public:
-		PWMController( TemperatureSensor::Ptr const& s, PWMActuator::Ptr const& a );
+		PWMController(
+			ControllerConfig const& c,
+			TemperatureSensor::Ptr const& s,
+			PWMActuator::Ptr const& a
+		) :
+			config( c ),
+			lastTemperature( INITIAL_TEMPERATURE ),
+			lastPwmValue( INITIAL_PWM_VALUE ),
+			hasJustStartedSpinning( false ),
+			sensor( s ),
+			actuator( a ) {};
 		void update();
 
 	private:
@@ -20,7 +30,7 @@ class PWMController {
 		PwmValue calcPwmValue( Temperature temperature ) const;
 
 	private:
-		RuntimeConfig const& config;
+		ControllerConfig const& config;
 		Temperature lastTemperature;
 		PwmValue lastPwmValue;
 		bool hasJustStartedSpinning;

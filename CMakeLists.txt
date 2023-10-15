@@ -1,31 +1,23 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(amdgpu-fan-control)
+project(fancontrol)
 
 add_executable(
-	amdgpu-fanctrl
-	src/logger2.cpp
+	fancontrol
+	src/config/config_option.cpp
+	src/config/config.cpp
+	src/config/controller_config.cpp
+	src/control/pwm_controller.cpp
+	src/control/pwm_controllers.cpp
+	src/hal/pwm_actuator.cpp
+	src/hal/pwm_actuator_factory.cpp
+	src/hal/temp_sensor.cpp
+	src/hal/temp_sensor_factory.cpp
+	src/logging/logger2.cpp
 	src/main.cpp
-	src/pwm_actuator.cpp
-	src/pwm_actuator_factory.cpp
-	src/pwm_controller.cpp
-	src/pwm_controllers.cpp
-	src/runtime_config.cpp
-	src/temp_sensor.cpp
-	src/temp_sensor_factory.cpp
 )
 
-add_executable(amdgpu-write-test prototypes/write-test.cpp)
+target_compile_options(fancontrol PRIVATE -Wall -Wextra -pedantic -Werror)
+target_compile_features(fancontrol PRIVATE cxx_std_17)
 
-add_executable(amdgpu-read-test prototypes/read-test.cpp)
-
-target_compile_options(amdgpu-fanctrl PRIVATE -Wall -Wextra -pedantic -Werror)
-target_compile_features(amdgpu-fanctrl PRIVATE cxx_std_17)
-
-target_compile_options(amdgpu-write-test PRIVATE -Wall -Wextra -pedantic -Werror)
-target_compile_features(amdgpu-write-test PRIVATE cxx_std_17)
-
-target_compile_options(amdgpu-read-test PRIVATE -Wall -Wextra -pedantic -Werror)
-target_compile_features(amdgpu-read-test PRIVATE cxx_std_17)
-
-install(TARGETS amdgpu-fanctrl RUNTIME DESTINATION bin)
+install(TARGETS fancontrol RUNTIME DESTINATION bin)

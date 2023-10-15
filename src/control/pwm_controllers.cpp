@@ -1,18 +1,18 @@
 #include "pwm_controller.h"
 #include "pwm_controllers.h"
-#include "temp_sensor.h"
-#include "temp_sensor_factory.h"
-#include "pwm_actuator.h"
-#include "pwm_actuator_factory.h"
-#include "logger2.h"
+#include "../hal/temp_sensor.h"
+#include "../hal/temp_sensor_factory.h"
+#include "../hal/pwm_actuator.h"
+#include "../hal/pwm_actuator_factory.h"
+#include "../logging/logger2.h"
 
 #include <chrono>
 #include <thread>
 
-namespace AmdGpuFanControl {
+namespace FanControl {
 
 PWMControllers::PWMControllers() :
-	config( RuntimeConfig::get() ),
+	config( Config::get() ),
 	runState( RunState::STOPPED ),
 	temperatureSensors(),
 	pwmActuators(),

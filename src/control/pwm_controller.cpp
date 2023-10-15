@@ -1,21 +1,12 @@
 #include "pwm_controller.h"
-#include "logger2.h"
+#include "../logging/logger2.h"
 
 #include <sstream>
 
-namespace AmdGpuFanControl {
+namespace FanControl {
 
 unsigned int const PWMController::INITIAL_TEMPERATURE( std::numeric_limits<Temperature>::min() );
 unsigned int const PWMController::INITIAL_PWM_VALUE( std::numeric_limits<PwmValue>::max() );
-
-PWMController::PWMController( TemperatureSensor::Ptr const& s, PWMActuator::Ptr const& a ) :
-	config( RuntimeConfig::get() ),
-	lastTemperature( INITIAL_TEMPERATURE ),
-	lastPwmValue( INITIAL_PWM_VALUE ),
-	hasJustStartedSpinning( false ),
-	sensor( s ),
-	actuator( a ) {
-}
 
 void PWMController::update() {
 	LogStream& log( LogStream::get() );

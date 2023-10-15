@@ -3,7 +3,7 @@
 
 #include <chrono>
 
-namespace AmdGpuFanControl {
+namespace FanControl {
 
 typedef unsigned int Temperature;
 typedef unsigned int PwmValue;

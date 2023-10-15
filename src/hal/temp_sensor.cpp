@@ -1,6 +1,6 @@
 #include "temp_sensor.h"
 
-namespace AmdGpuFanControl {
+namespace FanControl {
 
 TemperatureSensor::TemperatureSensor( std::string const& devFilePath ) :
 	fileStream() {
